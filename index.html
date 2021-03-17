@@ -6,8 +6,16 @@
   <title>Ski Areas and Cities of the United States</title>
   <link rel="stylesheet"
     href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=m2nbAnjdK3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=m2nbAnjdK3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=m2nbAnjdK3">
+  <link rel="manifest" href="/site.webmanifest?v=m2nbAnjdK3">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=m2nbAnjdK3" color="#5bbad5">
+  <link rel="shortcut icon" href="/favicon.ico?v=m2nbAnjdK3">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   <style>
   html,
   body,
@@ -29,7 +37,7 @@
     background-color: rgba(90, 90, 90, 0);
     overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
   }
   </style>
@@ -43,12 +51,12 @@
 <body>
   <div id="map"></div>
   <div id='side-panel'>
-    <h1 style="position:relative; left:12%; top: 10px; font-weight: 700">Ski Areas and Cities</h1>
+    <h1 style="position:relative; left:12%; top: 10px; font-weight: 600">Ski Areas and Cities</h1>
 
     <div style="position:absolute; left:10%; top: 9%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
 
-    <h2 style="position:absolute; left:10%; top: 7%; font-weight: 500"><br>About this map:</h2>
-    <p style="position:absolute; left:12%; top: 14.4%; right: 10px; font-weight: 300">
+    <h2 style="position:absolute; left:9%; top: 6%; font-weight: 400"><br>About this map:</h2>
+    <p style="position:absolute; left:12%; top: 13.7%; right: 10px; font-weight: 300">
       I created this map with the intent of <br>creating a
       tool to assist both experienced <br> and novice
       skiers in familiarizing <br> themselves with US ski
@@ -56,7 +64,7 @@
 
     <div style="position:absolute; left:10%; top: 29%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
 
-    <h2 style="position:absolute; left:10%; top: 27%; font-weight: 500"><br>Tools:</h2>
+    <h2 style="position:absolute; left:9%; top: 26%; font-weight: 400"><br>Tools:</h2>
 
     <div id='ui-data'>
       <label style="position:absolute; left:12%; top: 36%; right: 10px; font-weight: 300">Select Circle Scaling: </label>
@@ -75,7 +83,7 @@
         <option value="10">10</option>
       </select>
       <p style="position:absolute; left:28%; top: 44.3%; right: 10px; font-weight: 300">ski areas within</p>
-      <select id="areadistance" style="position:absolute; left:16%; top: 49%; right: 10px; font-weight: 500">
+      <select id="areadistance" style="position:absolute; left:16%; top: 49%; right: 10px; font-weight: 400">
         <option value="null" selected>Y</option>
         <option value="50000">50</option>
         <option value="150000">150</option>
@@ -261,7 +269,7 @@
 
   var baseVoyager = L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png', {
-      attribution: 'Wikipedia  | Base Map &copy; CartoDB | Made By Corin Zarkowski with help from Bo Zhao'
+      attribution: 'Ski Data &copy; Wikipedia | City Data &copy; Miserlou on GitHub | Pageview data &copy; Wikimedia Statistics API | Base Map &copy; CartoDB | Made By Corin Zarkowski'
     });
 
   drawMap();
