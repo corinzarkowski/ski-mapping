@@ -4,8 +4,6 @@
 
 ---
 
-![Preview](assets/preview.PNG)
-
 ## Introduction
 
 I created this map with the intent of creating a tool to assist both experienced and novice skiers in familiarizing themselves with United States ski areas and their relative distances to major cities. Tools included in the web map include sliders to adjust what ski areas are visible, based on both popularity (Wikipedia pageviews), and total vertical drop, a menu to select the basis of circle scaling between popularity and vertical, and a filter to only show cities with a given amount of ski areas in a given radius.
@@ -26,3 +24,6 @@ I used jquery for event management, leaflet for all map-related utility, and the
 ---
 
 Thank you to Professor Bo Zhao and my wonderful TA Tyler McCrea for providing me with the relevant abilities to create this web map and tool on a topic I've always loved.
+
+
+![Preview](assets/preview.PNG)
