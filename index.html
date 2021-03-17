@@ -43,12 +43,12 @@
 <body>
   <div id="map"></div>
   <div id='side-panel'>
-    <h1 style="position:relative; left:22%; top: 20px; font-weight: 700">Ski Area Map</h1>
+    <h1 style="position:relative; left:12%; top: 10px; font-weight: 700">Ski Areas and Cities</h1>
 
     <div style="position:absolute; left:10%; top: 9%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
 
     <h2 style="position:absolute; left:10%; top: 7%; font-weight: 500"><br>About this map:</h2>
-    <p style="position:absolute; left:12%; top: 14%; right: 10px; font-weight: 300">
+    <p style="position:absolute; left:12%; top: 14.4%; right: 10px; font-weight: 300">
       I created this map with the intent of <br>creating a
       tool to assist both experienced <br> and novice
       skiers in familiarizing <br> themselves with US ski
@@ -91,12 +91,6 @@
       <input id="vertslider" class="slider" type="range" min="0" max="4950" value="300"
           step="150" style="position:absolute; left:12%; top: 62%; right: 10px;">
       </div>
-
-      <div style="position:absolute; left:10%; top: 68%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
-
-      <h2 style="position:absolute; left:10%; top: 66%; font-weight: 500"><br>Currently Viewing:</h2>
-
-      <div style="position:absolute; left:10%; bottom: 8%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
 
       <p style='position:absolute;bottom:2%;left:20%; font-size: 80%'>Map Authored by Corin Zarkowski 2020</p>
     </div>
@@ -238,6 +232,8 @@
             } else {
               radius = 5;
               color = '#028a00';
+              opacity = 1;
+              layer.setStyle({opacity: opacity});
             }
           }
           layer.setStyle({color: color});
