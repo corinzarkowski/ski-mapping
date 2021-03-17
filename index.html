@@ -44,7 +44,9 @@
   <div id="map"></div>
   <div id='side-panel'>
     <h1 style="position:relative; left:22%; top: 20px; font-weight: 700">Ski Area Map</h1>
+
     <div style="position:absolute; left:10%; top: 9%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+
     <h2 style="position:absolute; left:10%; top: 7%; font-weight: 500"><br>About this map:</h2>
     <p style="position:absolute; left:12%; top: 14%; right: 10px; font-weight: 300">
       I created this map with the intent of <br>creating a
@@ -54,55 +56,65 @@
 
     <div style="position:absolute; left:10%; top: 29%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
 
-    <h2 style="position:absolute; left:10%; top: 29%; font-weight: 500"><br>Tools:</h2>
+    <h2 style="position:absolute; left:10%; top: 27%; font-weight: 500"><br>Tools:</h2>
+
     <div id='ui-data'>
-      <label style="position:absolute; left:12%; top: 38%; right: 10px; font-weight: 300">Select Circle Scaling: </label>
-      <select id="sector" style="position:absolute; left:12%; top: 40.5%; right: 10px; font-weight: 300">
+      <label style="position:absolute; left:12%; top: 36%; right: 10px; font-weight: 300">Select Circle Scaling: </label>
+      <select id="sector" style="position:absolute; left:12%; top: 38.5%; right: 10px; font-weight: 300">
         <option value="VIEWS" selected>Popularity (2020 Wikipedia pageviews)
         </option>
         <option value="VERT">Area Vertical</option>
       </select>
-      <label style="position:absolute; left:12%; top: 46%; right: 10px; font-weight: 300">Select City Filter Values: X areas within Y distance of each city: </label>
-      <select id="areacount" style="position:absolute; left:12%; top: 51.5%; right: 10px;">
-        <option value="1" selected>1 ski area</option>
-        <option value="3">3 ski areas</option>
-        <option value="5">5 areas</option>
-        <option value="7">7 areas</option>
-        <option value="10">10 areas</option>
+      <label style="position:absolute; left:12%; top: 43%; right: 10px; font-weight: 300">Select City Filter Values:</label>
+      <select id="areacount" style="position:absolute; left:16%; top: 46%; right: 10px;">
+        <option value="null" selected>X</option>
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="7">7</option>
+        <option value="10">10</option>
       </select>
-      <p style="position:absolute; left:37%; top: 49.8%; right: 10px; font-weight: 300">within</p>
-      <select id="areadistance" style="position:absolute; left:50%; top: 51.5%; right: 10px; font-weight: 500">
-        <option value="50000" selected>50km</option>
-        <option value="150000">150km</option>
-        <option value="400000">400km</option>
-        <option value="800000">800km</option>
-        <option value="1000000">1000km</option>
+      <p style="position:absolute; left:28%; top: 44.3%; right: 10px; font-weight: 300">ski areas within</p>
+      <select id="areadistance" style="position:absolute; left:16%; top: 49%; right: 10px; font-weight: 500">
+        <option value="null" selected>Y</option>
+        <option value="50000">50</option>
+        <option value="150000">150</option>
+        <option value="400000">400</option>
+        <option value="800000">800</option>
+        <option value="1000000">1000</option>
       </select>
-      <div id="popcutoff" style="position:absolute; left:12%; top: 57%; right: 10px; font-weight: 300">Minimum Pageviews: <span>10000</span></div>
+      <p style="position:absolute; left:32%; top: 47.3%; right: 10px; font-weight: 300">km of city</p>
+      <div id="popcutoff" style="position:absolute; left:12%; top: 53%; right: 10px; font-weight: 300">Minimum Pageviews: <span>10000</span></div>
       <input id="popslider" class="slider" type="range" min="0" max="50000" value="10000"
-        step="2500" style="position:absolute; left:12%; top: 59.5%; right: 10px;">
-      <div id="vertcutoff" style="position:absolute; left:12%; top: 65%; right: 10px; font-weight: 300">Minimum Vertical: <span>300</span></div>
+        step="2500" style="position:absolute; left:12%; top: 55.5%; right: 10px;">
+      <div id="vertcutoff" style="position:absolute; left:12%; top: 59%; right: 10px; font-weight: 300">Minimum Vertical: <span>300</span></div>
       <input id="vertslider" class="slider" type="range" min="0" max="4950" value="300"
-          step="150" style="position:absolute; left:12%; top: 68%; right: 10px;">
+          step="150" style="position:absolute; left:12%; top: 62%; right: 10px;">
       </div>
-      <p style='position:absolute;bottom:3%;left:12%'>Map Authored by Corin Zarkowski 2020</p>
+
+      <div style="position:absolute; left:10%; top: 68%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+
+      <h2 style="position:absolute; left:10%; top: 66%; font-weight: 500"><br>Currently Viewing:</h2>
+
+      <div style="position:absolute; left:10%; bottom: 8%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+
+      <p style='position:absolute;bottom:2%;left:20%; font-size: 80%'>Map Authored by Corin Zarkowski 2020</p>
     </div>
   </div>
   <script>
-
   function addUiListeners() {
-    $('select[id="sector"]').change(function() {
+    $('#sector').change(function() {
       sectorData = $(this).val();
       updateSymbols(sectorData, null, null);
     });
 
-    $('select[id="areacount"]').change(function() {
+    $('#areacount').change(function() {
       areaData = $(this).val();
       distanceData = $('select[id="areadistance"]').val();
       updateCities(distanceData, areaData);
     });
 
-    $('select[id="areadistance"]').change(function() {
+    $('#areadistance').change(function() {
       distanceData = $(this).val();
       areaData = $('select[id="areacount"]').val();
       updateCities(distanceData, areaData);
@@ -187,13 +199,15 @@
     console.log("updating city markers...");
     console.log(areaCutoff, ", ", distanceCutoff);
     var coords;
+    var skicoords;
     var cityname;
       dataCity.eachLayer(function(layer) {
         var areaCount = 0;
         var cityname = layer.feature.properties.city_name;
-        coords = L.latLng(layer.feature.geometry["coordinates"]);
+        coords = L.latLng(layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]);
         data.eachLayer(function(layer) {
-          if((L.latLng(layer.feature.geometry["coordinates"]).distanceTo(coords)) < distanceCutoff) {
+          skicoords = L.latLng(layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]);
+          if((skicoords.distanceTo(coords)) < distanceCutoff) {
             console.log("distance from", cityname, " to ", layer.feature.properties.name);
             console.log((L.latLng(layer.feature.geometry["coordinates"]).distanceTo(coords)));
             areaCount += 1;
@@ -207,7 +221,7 @@
       })
   }
 
-  function updateSymbols(weight, popCutoff, vertCutoff) {
+  function updateSymbols(weight, popCutoff, vertCutoff, hideNullVert) {
     console.log("updating markers...");
     var radius;
     var color;
@@ -251,7 +265,7 @@
 
   var baseVoyager = L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png', {
-      attribution: 'Airport Data &copy; Mike Bostock of D3 | State Lines &copy; USGS | Base Map &copy; CartoDB | Made By Corin Zarkowski with help from Bo Zhao'
+      attribution: 'Wikipedia  | Base Map &copy; CartoDB | Made By Corin Zarkowski with help from Bo Zhao'
     });
 
   drawMap();
