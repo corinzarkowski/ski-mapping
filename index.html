@@ -3,272 +3,283 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Airports in the United States</title>
+  <title>Ski Areas and Cities of the United States</title>
   <link rel="stylesheet"
     href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
   html,
   body,
+
   #map {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 80%;
   }
 
-  .legend {
-    line-height: 16px;
-    width: 180px;
-    color: #333333;
-    font-family: 'Open Sans', cursive;
-    padding: 6px 8px;
-    background: white;
-    background: rgba(255, 255, 255, 0.5);
+  #side-panel {
+    position: fixed;
+    left: 0px;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    background-color: rgba(90, 90, 90, 0);
+    overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-  }
-
-  .legend i {
-    width: 16px;
-    height: 16px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.9;
-  }
-
-  .legend img {
-    width: 16px;
-    height: 16px;
-    margin-right: 3px;
-    float: left;
-  }
-
-  .legend p {
-    font-size: 12px;
-    line-height: 16px;
-    margin: 0;
-  }
-
-  /* Set icon color depending on tower status */
-  .has-tower {
-    color: #f6f6f6;
-    font-size: 15px;
-    text-shadow: 0 0 3px #000000;
-  }
-
-  .no-tower {
-    color: #555555;
-    font-size: 15px;
-    text-shadow: 0 0 3px #000000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
   }
   </style>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js">
   </script>
-  <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">
-  </script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js">
-  </script>
-  <script src="js/heatmap.js"></script>
-  <script src="js/leaflet-heatmap.js"></script>
 </head>
 
 <body>
   <div id="map"></div>
+  <div id='side-panel'>
+    <h1 style="position:relative; left:22%; top: 20px; font-weight: 700">Ski Area Map</h1>
+    <div style="position:absolute; left:10%; top: 9%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+    <h2 style="position:absolute; left:10%; top: 7%; font-weight: 500"><br>About this map:</h2>
+    <p style="position:absolute; left:12%; top: 14%; right: 10px; font-weight: 300">
+      I created this map with the intent of <br>creating a
+      tool to assist both experienced <br> and novice
+      skiers in familiarizing <br> themselves with US ski
+      areas and their <br> relative locations to major cities.</p>
+
+    <div style="position:absolute; left:10%; top: 29%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+
+    <h2 style="position:absolute; left:10%; top: 29%; font-weight: 500"><br>Tools:</h2>
+    <div id='ui-data'>
+      <label style="position:absolute; left:12%; top: 38%; right: 10px; font-weight: 300">Select Circle Scaling: </label>
+      <select id="sector" style="position:absolute; left:12%; top: 40.5%; right: 10px; font-weight: 300">
+        <option value="VIEWS" selected>Popularity (2020 Wikipedia pageviews)
+        </option>
+        <option value="VERT">Area Vertical</option>
+      </select>
+      <label style="position:absolute; left:12%; top: 46%; right: 10px; font-weight: 300">Select City Filter Values: X areas within Y distance of each city: </label>
+      <select id="areacount" style="position:absolute; left:12%; top: 51.5%; right: 10px;">
+        <option value="1" selected>1 ski area</option>
+        <option value="3">3 ski areas</option>
+        <option value="5">5 areas</option>
+        <option value="7">7 areas</option>
+        <option value="10">10 areas</option>
+      </select>
+      <p style="position:absolute; left:37%; top: 49.8%; right: 10px; font-weight: 300">within</p>
+      <select id="areadistance" style="position:absolute; left:50%; top: 51.5%; right: 10px; font-weight: 500">
+        <option value="50000" selected>50km</option>
+        <option value="150000">150km</option>
+        <option value="400000">400km</option>
+        <option value="800000">800km</option>
+        <option value="1000000">1000km</option>
+      </select>
+      <div id="popcutoff" style="position:absolute; left:12%; top: 57%; right: 10px; font-weight: 300">Minimum Pageviews: <span>10000</span></div>
+      <input id="popslider" class="slider" type="range" min="0" max="50000" value="10000"
+        step="2500" style="position:absolute; left:12%; top: 59.5%; right: 10px;">
+      <div id="vertcutoff" style="position:absolute; left:12%; top: 65%; right: 10px; font-weight: 300">Minimum Vertical: <span>300</span></div>
+      <input id="vertslider" class="slider" type="range" min="0" max="4950" value="300"
+          step="150" style="position:absolute; left:12%; top: 68%; right: 10px;">
+      </div>
+      <p style='position:absolute;bottom:3%;left:12%'>Map Authored by Corin Zarkowski 2020</p>
+    </div>
+  </div>
   <script>
-  //--- STATES ---
 
-  // color array for choropleth
-  colors = chroma.scale('YlGn').colors(5);
+  function addUiListeners() {
+    $('select[id="sector"]').change(function() {
+      sectorData = $(this).val();
+      updateSymbols(sectorData, null, null);
+    });
 
-  // sets choropleth color per state depending on airport count
-  // bins are based on quartiles of the data, plus an extra bin for larger states (tx, ca, ak, fl)
-  function setColor(airportCount) {
-    var id = 0;
-    if (airportCount > 30) {
-      id = 4;
-    } else if (airportCount > 19 && airportCount <= 30) {
-      id = 3;
-    } else if (airportCount > 12 && airportCount <= 19) {
-      id = 2;
-    } else if (airportCount > 8 && airportCount <= 12) {
-      id = 1;
-    } else {
-      id = 0;
-    }
-    return colors[id];
-  }
+    $('select[id="areacount"]').change(function() {
+      areaData = $(this).val();
+      distanceData = $('select[id="areadistance"]').val();
+      updateCities(distanceData, areaData);
+    });
 
-  // applies style for each state
-  function styleState(feature) {
-    return {
-      fillColor: setColor(feature.properties.count),
-      fillOpacity: 0.4,
-      weight: 2,
-      opacity: 1,
-      color: '#b4b4b4',
-      dashArray: '4'
-    };
-  }
+    $('select[id="areadistance"]').change(function() {
+      distanceData = $(this).val();
+      areaData = $('select[id="areacount"]').val();
+      updateCities(distanceData, areaData);
+    });
 
-  // create state polygons based on GeoJSON
-  var states = null;
-  var statesLayer = L.layerGroup([]);
-  states = L.geoJson.ajax("assets/us-states.geojson", {
-    onEachFeature: function(feature, layer) {
-      layer.bindPopup("<b>" + feature.properties.name +
-        "</b><br>Number of airports: " + feature
-        .properties.count);
-    },
-    style: styleState
-  }).addTo(statesLayer);
+    $('#popslider')
+      .on('input change', function() {
+        popCutoff = $(this).val();
+        updateSymbols(null, popCutoff, $('#vertslider').val());
+        $('#popcutoff span').html(popCutoff);
+    });
 
-  // extra lil function with some fun regex to format airport names
-  function toProperCase(str) {
-    return str.replace(
-      /\w*/g, // select all words regardless of hyphenation
-      function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1)
-          .toLowerCase(); // set first letter cap and rest lowercase
-      }
-    );
-  }
-
-  // create airport points based on GeoJSON
-  // also creates the heatmap data in the process
-  var airports = null;
-  var airportLayer = L.layerGroup([]);
-  var heatmapData = {
-    data: []
+    $('#vertslider')
+      .on('input change', function() {
+        vertCutoff = $(this).val();
+        updateSymbols(null, $('#popslider').val(), vertCutoff);
+        $('#vertcutoff span').html(vertCutoff);
+    });
   };
-  airports = L.geoJson.ajax("assets/ski_geojson.json", {
-    onEachFeature: function(feature, layer) {
-      if(feature.properties.vertical){
-        layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia Pageviews in 2020: " +
-          feature.properties['pageviews-2020'] +
-          " <br>Vertical Drop: " + feature.properties.vertical + " ft");
-      } else{
-        layer.bindPopup("<b>" + feature.properties.name + "</b> <br>popularity: " +
-          feature.properties['pageviews-2020']);
+
+  function calcRadius(val) {
+    var radius = Math.sqrt(val / Math.PI);
+    return radius * .6;
+  }
+
+  function drawMap() {
+    console.log('drawing map...');
+    if(typeof(data) !== 'undefined'){
+      data.removeFrom(skimap);
+      delete data;
+    }
+    data = L.geoJson.ajax("assets/ski_geojson.json", {
+      onEachFeature: function(feature, layer) {
+        if(feature.properties.vertical){
+          layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia Pageviews in 2020: " +
+            feature.properties['pageviews-2020'] +
+            " <br>Vertical Drop: " + feature.properties.vertical + " ft");
+        } else{
+          layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia Pageviews in 2020:  " +
+            feature.properties['pageviews-2020'] +
+            " <br>Vertical Drop: N/A");
+        }
+      },
+      pointToLayer: function(feature, latlng) {
+        var id = 0;
+        var radius = calcRadius(feature.properties['pageviews-2020'] * .5);
+        if(feature.properties['pageviews-2020'] > 10000) {
+          var opacity = 1;
+        } else {
+          var opacity = 0;
+        }
+        return L.circleMarker(latlng, {
+            color: '#8C029A',
+            opacity: opacity,
+            weight: .6,
+            fillOpacity: 0,
+            radius: radius
+        });
       }
-      heatmapData['data'].push({
-        lat: feature.geometry.coordinates[1],
-        lng: feature.geometry.coordinates[0],
-        count: 1
+    }).addTo(skiLayer);
+
+    dataCity = L.geoJson.ajax("assets/cities_sorted.geojson", {
+      onEachFeature: function(feature, layer) { // TODO DELETE
+        layer.bindPopup("<b>" + feature.properties.city_name + "</b>");
+      },
+      pointToLayer: function(feature, latlng) {
+        var id = 0;
+        return L.circleMarker(latlng, {
+            color: '#000000',
+            opacity: 1,
+            weight: .6,
+            fillOpacity: .3,
+            radius: 5
+        });
+      }
+    }).addTo(cityLayer);
+
+    addUiListeners();
+  };
+
+  function updateCities(distanceCutoff, areaCutoff) {
+    console.log("updating city markers...");
+    console.log(areaCutoff, ", ", distanceCutoff);
+    var coords;
+    var cityname;
+      dataCity.eachLayer(function(layer) {
+        var areaCount = 0;
+        var cityname = layer.feature.properties.city_name;
+        coords = L.latLng(layer.feature.geometry["coordinates"]);
+        data.eachLayer(function(layer) {
+          if((L.latLng(layer.feature.geometry["coordinates"]).distanceTo(coords)) < distanceCutoff) {
+            console.log("distance from", cityname, " to ", layer.feature.properties.name);
+            console.log((L.latLng(layer.feature.geometry["coordinates"]).distanceTo(coords)));
+            areaCount += 1;
+          }
+        })
+        if(areaCount >= areaCutoff) {
+          layer.setStyle({opacity: 1, fillOpacity: .3});
+        } else {
+          layer.setStyle({opacity: 0, fillOpacity: 0});
+        }
       })
-    },
-    pointToLayer: function(feature, latlng) {
-      var id = 0;
-      if (feature.properties.CNTL_TWR == "Y") {
-        return L.marker(latlng, {
-          icon: L.divIcon({
-            className: 'fa fa-plane has-tower'
-          })
-        });
-      } else {
-        return L.marker(latlng, {
-          icon: L.divIcon({
-            className: 'fa fa-plane no-tower'
-          })
-        });
-      }
-    }
-  }).addTo(airportLayer);
+  }
 
-  // config for heatmap
-  var heatmap_cfg = {
-    "radius": 1,
-    "maxOpacity": .6,
-    "scaleRadius": true,
-    "useLocalExtrema": false,
-    latField: 'lat',
-    lngField: 'lng',
-    valueField: 'count'
+  function updateSymbols(weight, popCutoff, vertCutoff) {
+    console.log("updating markers...");
+    var radius;
+    var color;
+    var opacity;
+      data.eachLayer(function(layer) {
+        if(weight) {
+          if(weight === "VIEWS"){
+            radius = calcRadius(layer.feature.properties["pageviews-2020"]) * 0.5;
+            color = '#8C029A';
+          } else if(weight === "VERT"){
+            if(layer.feature.properties['vertical']){
+              radius = Math.pow(calcRadius(layer.feature.properties['vertical']), 2) / 10;
+              color = '#8C029A';
+            } else {
+              radius = 5;
+              color = '#028a00';
+            }
+          }
+          layer.setStyle({color: color});
+          layer.setRadius(radius);
+        } else if(popCutoff) {
+          if(layer.feature.properties['vertical'] !== 'undefined') {
+            if(layer.feature.properties['pageviews-2020'] >= popCutoff && parseInt(layer.feature.properties['vertical']) >= vertCutoff) {
+              layer.setStyle({opacity: 1});
+            } else {
+              layer.setStyle({opacity: 0});
+            }
+          } else {
+            if(layer.feature.properties['pageviews-2020'] >= popCutoff) {
+              layer.setStyle({opacity: 1});
+            } else {
+              layer.setStyle({opacity: 0});
+            }
+          }
+        }
+      }).bringToFront();
   };
 
-  // create layer for heatmap
-  var heatmapLayer = new HeatmapOverlay(heatmap_cfg);
+  var skiLayer = L.layerGroup([]);
+  var cityLayer = L.layerGroup([]);
 
-  // create layer for basemap
   var baseVoyager = L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png', {
       attribution: 'Airport Data &copy; Mike Bostock of D3 | State Lines &copy; USGS | Base Map &copy; CartoDB | Made By Corin Zarkowski with help from Bo Zhao'
     });
 
-  // initialize the map, finally
-  var airportmap = L.map('map', {
+  drawMap();
+  var skimap = L.map('map', {
     center: [38, -100],
     zoom: 5,
     maxZoom: 10,
     minZoom: 3,
     detectRetina: true,
-    layers: [baseVoyager, airportLayer, statesLayer]
+    layers: [baseVoyager, skiLayer, cityLayer]
   });
 
-  // event to set the heatmap data
-  // the heatmap data is created during the parsing of the airport GeoJSON,
-  // so I had to create a separate event to make sure the heatmap data is set
-  // after it's all created and stuff
-  airportmap.on('overlayadd', function addHeatMapData() {
-    console.log(heatmapData);
-    heatmapLayer.setData(heatmapData);
-  });
-
-  // create and format the legend
-  var legend = L.control({
-    position: 'topright'
-  });
-  legend.onAdd = function() {
-    var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML += '<b>Amount of Airports in State</b><br />';
-    div.innerHTML += '<i style="background: ' + colors[4] +
-      '; opacity: 0.5"></i><p> 31+ </p>';
-    div.innerHTML += '<i style="background: ' + colors[3] +
-      '; opacity: 0.5"></i><p> 20-30 </p>';
-    div.innerHTML += '<i style="background: ' + colors[2] +
-      '; opacity: 0.5"></i><p> 13-19 </p>';
-    div.innerHTML += '<i style="background: ' + colors[1] +
-      '; opacity: 0.5"></i><p> 9-12 </p>';
-    div.innerHTML += '<i style="background: ' + colors[0] +
-      '; opacity: 0.5"></i><p> 0-8 </p>';
-    div.innerHTML += '<hr><b>Control Tower<b><br />';
-    div.innerHTML +=
-      '<i class="fa fa-plane has-tower"></i><p> Has control tower </p>';
-    div.innerHTML +=
-      '<i class="fa fa-plane no-tower"></i><p> No control tower </p>';
-
-    return div;
-  };
-  legend.addTo(airportmap);
-
-  // create and add scale
   L.control.scale({
     position: 'bottomleft'
-  }).addTo(airportmap);
+  }).addTo(skimap);
 
-  // put the layers into categories for use with layer control
   var baseMaps = {
     "Basemap": baseVoyager
   }
   var overlayMaps = {
-    "States": statesLayer,
-    "Airports": airportLayer,
-    "Heatmap": heatmapLayer
+    "Airports": skiLayer,
+    "Cities": cityLayer
   }
 
-  // create the layer control
   L.control.layers(baseMaps, overlayMaps, {
     position: 'topright'
-  }).addTo(airportmap);
+  }).addTo(skimap);
+
   </script>
 </body>
 
