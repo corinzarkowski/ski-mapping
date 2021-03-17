@@ -4,6 +4,8 @@
 
 ---
 
+![Preview](assets/preview.PNG)
+
 ## Introduction
 
 I created this map with the intent of creating a tool to assist both experienced and novice skiers in familiarizing themselves with United States ski areas and their relative distances to major cities. Tools included in the web map include sliders to adjust what ski areas are visible, based on both popularity (Wikipedia pageviews), and total vertical drop, a menu to select the basis of circle scaling between popularity and vertical, and a filter to only show cities with a given amount of ski areas in a given radius.
