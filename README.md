@@ -25,5 +25,6 @@ I used jquery for event management, leaflet for all map-related utility, and the
 
 Thank you to Professor Bo Zhao and my wonderful TA Tyler McCrea for providing me with the relevant abilities to create this web map and tool on a topic I've always loved.
 
+---
 
 ![Preview](assets/preview.PNG)
