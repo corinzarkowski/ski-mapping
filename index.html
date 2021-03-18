@@ -40,6 +40,13 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
   }
+
+  .dividing-line {
+    width:80%;
+    height:4px;
+    background-color:black;
+    opacity:.3;
+  }
   </style>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -51,9 +58,9 @@
 <body>
   <div id="map"></div>
   <div id='side-panel'>
-    <h1 style="position:relative; left:12%; top: 10px; font-weight: 600">Ski Areas and Cities</h1>
+    <h1 style="position:relative; left:9%; top: 10px; font-weight: 600">Ski Areas and Cities</h1>
 
-    <div style="position:absolute; left:10%; top: 9%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+    <div class="dividing-line" style="position:absolute; left:10%; top: 9%;"></div>
 
     <h2 style="position:absolute; left:9%; top: 6%; font-weight: 400"><br>About this map:</h2>
     <p style="position:absolute; left:12%; top: 13.7%; right: 10px; font-weight: 300">
@@ -62,7 +69,7 @@
       skiers in familiarizing <br> themselves with US ski
       areas and their <br> relative locations to major cities.</p>
 
-    <div style="position:absolute; left:10%; top: 29%; width:80%; height:4px; background-color:black; opacity:.3;"></div>
+    <div class="dividing-line" style="position:absolute; left:10%; top: 29%;"></div>
 
     <h2 style="position:absolute; left:9%; top: 26%; font-weight: 400"><br>Tools:</h2>
 
@@ -93,12 +100,19 @@
       </select>
       <p style="position:absolute; left:32%; top: 47.3%; right: 10px; font-weight: 300">km of city</p>
       <div id="popcutoff" style="position:absolute; left:12%; top: 53%; right: 10px; font-weight: 300">Minimum Pageviews: <span>10000</span></div>
-      <input id="popslider" class="slider" type="range" min="0" max="50000" value="10000"
+      <input id="popslider" class="slider" type="range" min="0" max="50000" value="0"
         step="2500" style="position:absolute; left:12%; top: 55.5%; right: 10px;">
       <div id="vertcutoff" style="position:absolute; left:12%; top: 59%; right: 10px; font-weight: 300">Minimum Vertical: <span>300</span></div>
-      <input id="vertslider" class="slider" type="range" min="0" max="4950" value="300"
+      <input id="vertslider" class="slider" type="range" min="0" max="4950" value="0"
           step="150" style="position:absolute; left:12%; top: 62%; right: 10px;">
       </div>
+
+      <input type="checkbox" id="hideNullVert" value="Hide" style="position:absolute; left:84.5%; top: 66%; right: 10px; font-weight: 300">
+      <label for="hideNullVert" style="position:absolute; left:12%; top: 65.7%; right: 10px; font-weight: 300">Hide ski areas with missing verticals: </label><br>
+
+      <div class="dividing-line" style="position:absolute; left:10%; top: 71%;"></div>
+
+      <div id="currentview" style="position:absolute; left:12%; top: 80%; font-weight: 300">Minimum Pageviews: <span></span></div>
 
       <p style='position:absolute;bottom:2%;left:20%; font-size: 80%'>Map Authored by Corin Zarkowski 2020</p>
     </div>
@@ -112,13 +126,13 @@
 
     $('#areacount').change(function() {
       areaData = $(this).val();
-      distanceData = $('select[id="areadistance"]').val();
+      distanceData = $('#areadistance').val();
       updateCities(distanceData, areaData);
     });
 
     $('#areadistance').change(function() {
       distanceData = $(this).val();
-      areaData = $('select[id="areacount"]').val();
+      areaData = $('#areacount').val();
       updateCities(distanceData, areaData);
     });
 
@@ -135,12 +149,23 @@
         updateSymbols(null, $('#popslider').val(), vertCutoff);
         $('#vertcutoff span').html(vertCutoff);
     });
+
+    $('#hideNullVert').change(function() {
+      if (this.checked) {
+        hideNullVert = true;
+      } else {
+        hideNullVert = false;
+      }
+      updateSymbols(null, $('#popslider').val(), $('#vertslider').val());
+    });
   };
 
   function calcRadius(val) {
     var radius = Math.sqrt(val / Math.PI);
     return radius * .6;
   }
+
+  var hideNullVert = false;
 
   function drawMap() {
     console.log('drawing map...');
@@ -161,16 +186,10 @@
         }
       },
       pointToLayer: function(feature, latlng) {
-        var id = 0;
         var radius = calcRadius(feature.properties['pageviews-2020'] * .5);
-        if(feature.properties['pageviews-2020'] > 10000) {
-          var opacity = 1;
-        } else {
-          var opacity = 0;
-        }
         return L.circleMarker(latlng, {
             color: '#8C029A',
-            opacity: opacity,
+            opacity: 1,
             weight: .6,
             fillOpacity: 0,
             radius: radius
@@ -183,7 +202,6 @@
         layer.bindPopup("<b>" + feature.properties.city_name + "</b>");
       },
       pointToLayer: function(feature, latlng) {
-        var id = 0;
         return L.circleMarker(latlng, {
             color: '#000000',
             opacity: 1,
@@ -223,7 +241,7 @@
       })
   }
 
-  function updateSymbols(weight, popCutoff, vertCutoff, hideNullVert) {
+  function updateSymbols(weight, popCutoff, vertCutoff) {
     console.log("updating markers...");
     var radius;
     var color;
@@ -246,15 +264,15 @@
           }
           layer.setStyle({color: color});
           layer.setRadius(radius);
-        } else if(popCutoff) {
-          if(layer.feature.properties['vertical'] !== 'undefined') {
+        } else if(popCutoff && vertCutoff) {
+          if(layer.feature.properties['vertical']) {
             if(layer.feature.properties['pageviews-2020'] >= popCutoff && parseInt(layer.feature.properties['vertical']) >= vertCutoff) {
               layer.setStyle({opacity: 1});
             } else {
               layer.setStyle({opacity: 0});
             }
           } else {
-            if(layer.feature.properties['pageviews-2020'] >= popCutoff) {
+            if(layer.feature.properties['pageviews-2020'] >= popCutoff && !hideNullVert) {
               layer.setStyle({opacity: 1});
             } else {
               layer.setStyle({opacity: 0});
