@@ -53,10 +53,11 @@
   }
 
   .dividing-line {
-    width:80%;
+    width:30%;
     height:4px;
     background-color:black;
     opacity:.3;
+    left:35%;
   }
   </style>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -71,17 +72,14 @@
   <div id='side-panel'>
     <h1 style="position:relative; left:9%; top: 10px; font-weight: 600">Ski Areas and Cities</h1>
 
-    <div class="dividing-line" style="position:absolute; left:10%; top: 9%;"></div>
+    <div class="dividing-line" style="position:absolute; top: 9%;"></div>
 
-    <h2 style="position:absolute; left:9%; top: 6%; font-weight: 400"><br>About this map:</h2>
+    <h2 style="position:absolute; left:9%; top: 6%; font-weight: 400"><br>About:</h2>
     <p style="position:absolute; left:12%; top: 13.7%; right: 10px; font-weight: 300">
-      I created this map with the intent of <br>creating a
-      tool to assist both experienced <br> and novice
-      skiers in familiarizing <br> themselves with US ski
-      areas and their <br> relative locations to major cities.</p>
+      A map showing both ski areas and major cities in the US. Each circle on the map is a ski area that may be clicked on to view more information. Use the tools below to play around with and shape the data.</p>
 
 
-    <div class="dividing-line" style="position:absolute; left:10%; top: 29%;"></div>
+    <div class="dividing-line" style="position:absolute; top: 29%;"></div>
 
 
     <h2 style="position:absolute; left:9%; top: 26%; font-weight: 400"><br>Tools:</h2>
@@ -132,13 +130,22 @@
       <input type="checkbox" id="hideNullViews" value="Hide" style="position:absolute; left:86.5%; top: 75.4%; right: 10px; font-weight: 300">
     </div>
 
+    <div class="dividing-line" style="position:absolute; bottom: 21%;"></div>
 
-      <p style="position:absolute;bottom:13%;left:8%; font-size: 80%">Ski areas with missing values are represented with</p>
-      <div id="circle" style="position:absolute; left:90%; bottom: 14.5%;"></div>
+    <p style="position:absolute;bottom:16.5%;left:8%; font-size: 80%">Ski areas with missing values are represented with</p>
+    <div id="circle" style="position:absolute; left:90%; bottom: 18%;"></div>
 
-      <div class="dividing-line" style="position:absolute; left:10%; bottom: 6%;"></div>
+    <div class="dividing-line" style="position:absolute; bottom: 16.8%; opacity: .1; width: 5%; left: 47%"></div>
 
-      <p style="position:absolute;bottom:.8%;left:28%; font-size: 100%">Corin Zarkowski 2020</p>
+    <p style="position:absolute;bottom:11.5%;left:8%; font-size: 80%">Use the layer control in the upper right to hide or view either ski areas or cities.</p>
+
+    <div class="dividing-line" style="position:absolute; bottom: 12%; opacity: .1; width: 5%; left: 47%"></div>
+
+    <p style="position:absolute;bottom:6.5%; left:8%; font-size: 80%">Pageview stats on ski area popups do not currently update with year changes.</p>
+
+    <div class="dividing-line" style="position:absolute; bottom: 6%;"></div>
+
+    <p style="position:absolute;bottom:.8%;left:28%; font-size: 100%">Corin Zarkowski 2020</p>
     </div>
   </div>
   <script>
