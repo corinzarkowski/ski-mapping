@@ -41,6 +41,17 @@
     font-weight: 300;
   }
 
+  #circle {
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-color: #028a00;
+    border-style: solid;
+    border-width: .4px;
+  }
+
   .dividing-line {
     width:80%;
     height:4px;
@@ -69,16 +80,17 @@
       skiers in familiarizing <br> themselves with US ski
       areas and their <br> relative locations to major cities.</p>
 
+
     <div class="dividing-line" style="position:absolute; left:10%; top: 29%;"></div>
+
 
     <h2 style="position:absolute; left:9%; top: 26%; font-weight: 400"><br>Tools:</h2>
 
     <div id='ui-data'>
       <label style="position:absolute; left:12%; top: 36%; right: 10px; font-weight: 300">Select Circle Scaling: </label>
       <select id="sector" style="position:absolute; left:12%; top: 38.5%; right: 10px; font-weight: 300">
-        <option value="VIEWS" selected>Popularity (2020 Wikipedia pageviews)
-        </option>
-        <option value="VERT">Area Vertical</option>
+        <option value="VIEWS" selected>Pageviews</option>
+        <option value="VERT">Vertical</option>
       </select>
       <label style="position:absolute; left:12%; top: 43%; right: 10px; font-weight: 300">Select City Filter Values:</label>
       <select id="areacount" style="position:absolute; left:16%; top: 46%; right: 10px;">
@@ -99,29 +111,40 @@
         <option value="1000000">1000</option>
       </select>
       <p style="position:absolute; left:32%; top: 47.3%; right: 10px; font-weight: 300">km of city</p>
-      <div id="popcutoff" style="position:absolute; left:12%; top: 53%; right: 10px; font-weight: 300">Minimum Pageviews: <span>10000</span></div>
+
+
+      <div id="popcutoff" style="position:absolute; left:12%; top: 53%; right: 10px; font-weight: 300">Minimum Pageviews: <span>0</span></div>
       <input id="popslider" class="slider" type="range" min="0" max="50000" value="0"
         step="2500" style="position:absolute; left:12%; top: 55.5%; right: 10px;">
-      <div id="vertcutoff" style="position:absolute; left:12%; top: 59%; right: 10px; font-weight: 300">Minimum Vertical: <span>300</span></div>
+
+      <div id="vertcutoff" style="position:absolute; left:12%; top: 59%; right: 10px; font-weight: 300">Minimum Vertical: <span>0</span></div>
       <input id="vertslider" class="slider" type="range" min="0" max="4950" value="0"
-          step="150" style="position:absolute; left:12%; top: 62%; right: 10px;">
-      </div>
+          step="150" style="position:absolute; left:12%; top: 61.5%; right: 10px;">
 
-      <input type="checkbox" id="hideNullVert" value="Hide" style="position:absolute; left:84.5%; top: 66%; right: 10px; font-weight: 300">
-      <label for="hideNullVert" style="position:absolute; left:12%; top: 65.7%; right: 10px; font-weight: 300">Hide ski areas with missing verticals: </label><br>
+      <div id="currentyear" style="position:absolute; left:12%; top: 65%; right: 10px; font-weight: 300">Current Year: <span>2015</span></div>
+      <input id="yearslider" class="slider" type="range" min="2015" max="2020" value="2015"
+          step="1" style="position:absolute; left:12%; top: 67.5%; right: 10px;">
 
-      <div class="dividing-line" style="position:absolute; left:10%; top: 71%;"></div>
 
-      <div id="currentview" style="position:absolute; left:12%; top: 80%; font-weight: 300">Minimum Pageviews: <span></span></div>
+      <label for="hideNullVert" style="position:absolute; left:10%; top: 72%; right: 10px; font-weight: 300">Hide ski areas with missing verticals: </label><br>
+      <input type="checkbox" id="hideNullVert" value="Hide" style="position:absolute; left:82.5%; top: 72.3%; right: 10px; font-weight: 300">
+      <label for="hideNullViews" style="position:absolute; left:10%; top: 75%; right: 10px; font-weight: 300">Hide ski areas with missing pageviews: </label><br>
+      <input type="checkbox" id="hideNullViews" value="Hide" style="position:absolute; left:86.5%; top: 75.4%; right: 10px; font-weight: 300">
+    </div>
 
-      <p style='position:absolute;bottom:2%;left:20%; font-size: 80%'>Map Authored by Corin Zarkowski 2020</p>
+
+      <p style="position:absolute;bottom:13%;left:8%; font-size: 80%">Ski areas with missing values are represented with</p>
+      <div id="circle" style="position:absolute; left:90%; bottom: 14.5%;"></div>
+
+      <div class="dividing-line" style="position:absolute; left:10%; bottom: 6%;"></div>
+
+      <p style="position:absolute;bottom:.8%;left:28%; font-size: 100%">Corin Zarkowski 2020</p>
     </div>
   </div>
   <script>
   function addUiListeners() {
     $('#sector').change(function() {
-      sectorData = $(this).val();
-      updateSymbols(sectorData, null, null);
+      updateSymbols("weight");
     });
 
     $('#areacount').change(function() {
@@ -138,16 +161,20 @@
 
     $('#popslider')
       .on('input change', function() {
-        popCutoff = $(this).val();
-        updateSymbols(null, popCutoff, $('#vertslider').val());
-        $('#popcutoff span').html(popCutoff);
+        updateSymbols("");
+        $('#popcutoff span').html($(this).val());
     });
 
     $('#vertslider')
       .on('input change', function() {
-        vertCutoff = $(this).val();
-        updateSymbols(null, $('#popslider').val(), vertCutoff);
-        $('#vertcutoff span').html(vertCutoff);
+        updateSymbols("");
+        $('#vertcutoff span').html($(this).val());
+    });
+
+    $('#yearslider')
+      .on('input change', function() {
+        updateSymbols("year");
+        $('#currentyear span').html($('#yearslider').val());
     });
 
     $('#hideNullVert').change(function() {
@@ -156,7 +183,16 @@
       } else {
         hideNullVert = false;
       }
-      updateSymbols(null, $('#popslider').val(), $('#vertslider').val());
+      updateSymbols("");
+    });
+
+    $('#hideNullViews').change(function() {
+      if (this.checked) {
+        hideNullViews = true;
+      } else {
+        hideNullViews = false;
+      }
+      updateSymbols("");
     });
   };
 
@@ -166,6 +202,7 @@
   }
 
   var hideNullVert = false;
+  var hideNullViews = false;
 
   function drawMap() {
     console.log('drawing map...');
@@ -173,22 +210,25 @@
       data.removeFrom(skimap);
       delete data;
     }
-    data = L.geoJson.ajax("assets/ski_geojson.json", {
+    data = L.geoJson.ajax("assets/ski_geojson_v2.json", {
       onEachFeature: function(feature, layer) {
-        if(feature.properties.vertical){
-          layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia Pageviews in 2020: " +
-            feature.properties['pageviews-2020'] +
-            " <br>Vertical Drop: " + feature.properties.vertical + " ft");
-        } else{
-          layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia Pageviews in 2020:  " +
-            feature.properties['pageviews-2020'] +
-            " <br>Vertical Drop: N/A");
-        }
+        layer.bindPopup("<b>" + feature.properties.name + "</b> <br>Wikipedia pageviews in year selected: " +
+          feature.properties.pageviews[$('#yearslider').val()] +
+          " <br>Vertical Drop (ft): " + feature.properties.vertical);
       },
       pointToLayer: function(feature, latlng) {
-        var radius = calcRadius(feature.properties['pageviews-2020'] * .5);
+        var radius;
+        var color;
+        if(feature.properties.pageviews[$('#yearslider').val()] != "null") {
+          radius = calcRadius(feature.properties.pageviews[$('#yearslider').val()]) * .5;
+          color = "#8C029A"
+        } else {
+          radius = 5;
+          color = "#028a00"
+        }
+
         return L.circleMarker(latlng, {
-            color: '#8C029A',
+            color: color,
             opacity: 1,
             weight: .6,
             fillOpacity: 0,
@@ -217,7 +257,6 @@
 
   function updateCities(distanceCutoff, areaCutoff) {
     console.log("updating city markers...");
-    console.log(areaCutoff, ", ", distanceCutoff);
     var coords;
     var skicoords;
     var cityname;
@@ -228,8 +267,6 @@
         data.eachLayer(function(layer) {
           skicoords = L.latLng(layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]);
           if((skicoords.distanceTo(coords)) < distanceCutoff) {
-            console.log("distance from", cityname, " to ", layer.feature.properties.name);
-            console.log((L.latLng(layer.feature.geometry["coordinates"]).distanceTo(coords)));
             areaCount += 1;
           }
         })
@@ -241,45 +278,71 @@
       })
   }
 
-  function updateSymbols(weight, popCutoff, vertCutoff) {
+  function updateSymbols(updateValue) {
     console.log("updating markers...");
     var radius;
     var color;
     var opacity;
-      data.eachLayer(function(layer) {
-        if(weight) {
-          if(weight === "VIEWS"){
-            radius = calcRadius(layer.feature.properties["pageviews-2020"]) * 0.5;
+    var weight = $('#sector').val();
+    var year = $('#yearslider').val();
+    var popCutoff = $('#popslider').val();
+    var vertCutoff = $('#vertslider').val();
+
+    data.eachLayer(function(layer) {
+      var vertical = layer.feature.properties.vertical;
+      var pageviews = layer.feature.properties.pageviews[year];
+
+      if(updateValue === "weight") {
+        if(weight === "VIEWS"){
+          if(views !== "null") {
+            radius = calcRadius(pageviews) * .5;
             color = '#8C029A';
-          } else if(weight === "VERT"){
-            if(layer.feature.properties['vertical']){
-              radius = Math.pow(calcRadius(layer.feature.properties['vertical']), 2) / 10;
-              color = '#8C029A';
-            } else {
-              radius = 5;
-              color = '#028a00';
-              opacity = 1;
-              layer.setStyle({opacity: opacity});
-            }
-          }
-          layer.setStyle({color: color});
-          layer.setRadius(radius);
-        } else if(popCutoff && vertCutoff) {
-          if(layer.feature.properties['vertical']) {
-            if(layer.feature.properties['pageviews-2020'] >= popCutoff && parseInt(layer.feature.properties['vertical']) >= vertCutoff) {
-              layer.setStyle({opacity: 1});
-            } else {
-              layer.setStyle({opacity: 0});
-            }
           } else {
-            if(layer.feature.properties['pageviews-2020'] >= popCutoff && !hideNullVert) {
-              layer.setStyle({opacity: 1});
-            } else {
-              layer.setStyle({opacity: 0});
-            }
+            radius = 5;
+            color = '#028a00';
           }
         }
-      }).bringToFront();
+        if(weight === "VERT"){
+          if(vertical !== "null") {
+            radius = Math.pow(calcRadius(vertical), 2) / 10;
+            color = '#8C029A';
+          } else {
+            radius = 5;
+            color = '#028a00';
+          }
+        }
+        layer.setStyle({color: color});
+        layer.setRadius(radius);
+      }
+
+      if(updateValue === "year" && weight === "VIEWS"){
+        if(pageviews !== "null"){
+          radius = calcRadius(pageviews) * 0.5;
+          color = '#8C029A';
+        } else {
+          radius = 5;
+          color = '#028a00';
+        }
+        layer.setStyle({color: color});
+        layer.setRadius(radius);
+      }
+
+      var vertValid = false;
+      var viewsValid = false;
+      if((!hideNullVert && vertical === "null") || (vertical !== "null" && vertical >= vertCutoff)) {
+        vertValid = true;
+      }
+      if((!hideNullViews && pageviews === "null") || (pageviews !== "null" && pageviews >= popCutoff)) {
+        viewsValid = true;
+      }
+
+      if(vertValid && viewsValid) {
+        layer.setStyle({opacity: 1});
+      } else {
+        layer.setStyle({opacity: 0});
+      }
+
+    }).bringToFront();
   };
 
   var skiLayer = L.layerGroup([]);

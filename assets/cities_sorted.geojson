@@ -131,20 +131,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -121.8863286,37.3382082 ]
-    },
-    "properties": {
-    "city_name":"San Jose",
-    "growth_2000_2013":"10.5%",
-    "pop":998537,
-    "rank_size":10,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -97.7430608,30.267153 ]
     },
     "properties": {
@@ -223,20 +209,6 @@
     "pop":792862,
     "rank_size":16,
     "state":"North Carolina"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -97.3307658,32.7554883 ]
-    },
-    "properties": {
-    "city_name":"Fort Worth",
-    "growth_2000_2013":"45.1%",
-    "pop":792727,
-    "rank_size":17,
-    "state":"Texas"
     }
   },
   {
@@ -495,20 +467,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -118.1937395,33.7700504 ]
-    },
-    "properties": {
-    "city_name":"Long Beach",
-    "growth_2000_2013":"1.5%",
-    "pop":469428,
-    "rank_size":36,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -94.5785667,39.0997265 ]
     },
     "properties": {
@@ -517,20 +475,6 @@
     "pop":467007,
     "rank_size":37,
     "state":"Missouri"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -111.8314724,33.4151843 ]
-    },
-    "properties": {
-    "city_name":"Mesa",
-    "growth_2000_2013":"13.5%",
-    "pop":457587,
-    "rank_size":38,
-    "state":"Arizona"
     }
   },
   {
@@ -621,20 +565,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -122.2711137,37.8043637 ]
-    },
-    "properties": {
-    "city_name":"Oakland",
-    "growth_2000_2013":"1.3%",
-    "pop":406253,
-    "rank_size":45,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -93.2650108,44.977753 ]
     },
     "properties": {
@@ -685,20 +615,6 @@
     "pop":386552,
     "rank_size":49,
     "state":"Kansas"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -97.10806559999999,32.735687 ]
-    },
-    "properties": {
-    "city_name":"Arlington",
-    "growth_2000_2013":"13.3%",
-    "pop":379577,
-    "rank_size":50,
-    "state":"Texas"
     }
   },
   {
@@ -761,48 +677,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -104.8319195,39.7294319 ]
-    },
-    "properties": {
-    "city_name":"Aurora",
-    "growth_2000_2013":"24.4%",
-    "pop":345803,
-    "rank_size":55,
-    "state":"Colorado"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -117.9145036,33.8352932 ]
-    },
-    "properties": {
-    "city_name":"Anaheim",
-    "growth_2000_2013":"4.7%",
-    "pop":345012,
-    "rank_size":56,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -117.8678338,33.7455731 ]
-    },
-    "properties": {
-    "city_name":"Santa Ana",
-    "growth_2000_2013":"-1.2%",
-    "pop":334227,
-    "rank_size":57,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -90.19940419999999,38.6270025 ]
     },
     "properties": {
@@ -811,20 +685,6 @@
     "pop":318416,
     "rank_size":58,
     "state":"Missouri"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -117.3961564,33.9533487 ]
-    },
-    "properties": {
-    "city_name":"Riverside",
-    "growth_2000_2013":"22.5%",
-    "pop":316619,
-    "rank_size":59,
-    "state":"California"
     }
   },
   {
@@ -915,20 +775,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -93.0899578,44.9537029 ]
-    },
-    "properties": {
-    "city_name":"St. Paul",
-    "growth_2000_2013":"2.8%",
-    "pop":294873,
-    "rank_size":66,
-    "state":"Minnesota"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -83.55521200000001,41.6639383 ]
     },
     "properties": {
@@ -937,62 +783,6 @@
     "pop":282313,
     "rank_size":67,
     "state":"Ohio"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -79.7919754,36.0726354 ]
-    },
-    "properties": {
-    "city_name":"Greensboro",
-    "growth_2000_2013":"22.3%",
-    "pop":279639,
-    "rank_size":68,
-    "state":"North Carolina"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -74.1723667,40.735657 ]
-    },
-    "properties": {
-    "city_name":"Newark",
-    "growth_2000_2013":"2.1%",
-    "pop":278427,
-    "rank_size":69,
-    "state":"New Jersey"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -96.6988856,33.0198431 ]
-    },
-    "properties": {
-    "city_name":"Plano",
-    "growth_2000_2013":"22.4%",
-    "pop":274409,
-    "rank_size":70,
-    "state":"Texas"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -114.9817213,36.0395247 ]
-    },
-    "properties": {
-    "city_name":"Henderson",
-    "growth_2000_2013":"51.0%",
-    "pop":270811,
-    "rank_size":71,
-    "state":"Nevada"
     }
   },
   {
@@ -1041,20 +831,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -117.0841955,32.6400541 ]
-    },
-    "properties": {
-    "city_name":"Chula Vista",
-    "growth_2000_2013":"46.2%",
-    "pop":256780,
-    "rank_size":75,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -85.1393513,41.079273 ]
     },
     "properties": {
@@ -1077,34 +853,6 @@
     "pop":255483,
     "rank_size":77,
     "state":"Florida"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -82.64,27.773056 ]
-    },
-    "properties": {
-    "city_name":"St. Petersburg",
-    "growth_2000_2013":"0.3%",
-    "pop":249688,
-    "rank_size":78,
-    "state":"Florida"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -111.8412502,33.3061605 ]
-    },
-    "properties": {
-    "city_name":"Chandler",
-    "growth_2000_2013":"38.7%",
-    "pop":249146,
-    "rank_size":79,
-    "state":"Arizona"
     }
   },
   {
@@ -1139,20 +887,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -78.898619,35.9940329 ]
-    },
-    "properties": {
-    "city_name":"Durham",
-    "growth_2000_2013":"29.9%",
-    "pop":245475,
-    "rank_size":82,
-    "state":"North Carolina"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -89.4012302,43.0730517 ]
     },
     "properties": {
@@ -1175,76 +909,6 @@
     "pop":239538,
     "rank_size":84,
     "state":"Texas"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -117.7946942,33.6839473 ]
-    },
-    "properties": {
-    "city_name":"Irvine",
-    "growth_2000_2013":"61.3%",
-    "pop":236716,
-    "rank_size":85,
-    "state":"California"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.244216,36.09985959999999 ]
-    },
-    "properties": {
-    "city_name":"Winston-Salem",
-    "growth_2000_2013":"16.9%",
-    "pop":236441,
-    "rank_size":86,
-    "state":"North Carolina"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -112.1859866,33.5386523 ]
-    },
-    "properties": {
-    "city_name":"Glendale",
-    "growth_2000_2013":"5.7%",
-    "pop":234632,
-    "rank_size":87,
-    "state":"Arizona"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -96.63888329999999,32.912624 ]
-    },
-    "properties": {
-    "city_name":"Garland",
-    "growth_2000_2013":"8.5%",
-    "pop":234566,
-    "rank_size":88,
-    "state":"Texas"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -80.2781057,25.8575963 ]
-    },
-    "properties": {
-    "city_name":"Hialeah",
-    "growth_2000_2013":"3.2%",
-    "pop":233394,
-    "rank_size":89,
-    "state":"Florida"
     }
   },
   {
@@ -1279,20 +943,6 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -111.789027,33.3528264 ]
-    },
-    "properties": {
-    "city_name":"Gilbert",
-    "growth_2000_2013":"96.0%",
-    "pop":229972,
-    "rank_size":92,
-    "state":"Arizona"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
        "coordinates":  [ -91.1403196,30.4582829 ]
     },
     "properties": {
@@ -1301,62 +951,6 @@
     "pop":229426,
     "rank_size":93,
     "state":"Louisiana"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -96.9488945,32.8140177 ]
-    },
-    "properties": {
-    "city_name":"Irving",
-    "growth_2000_2013":"19.1%",
-    "pop":228653,
-    "rank_size":94,
-    "state":"Texas"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -111.9260519,33.4941704 ]
-    },
-    "properties": {
-    "city_name":"Scottsdale",
-    "growth_2000_2013":"11.0%",
-    "pop":226918,
-    "rank_size":95,
-    "state":"Arizona"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -115.1175013,36.1988592 ]
-    },
-    "properties": {
-    "city_name":"North Las Vegas",
-    "growth_2000_2013":"92.2%",
-    "pop":226877,
-    "rank_size":96,
-    "state":"Nevada"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -121.9885719,37.5482697 ]
-    },
-    "properties": {
-    "city_name":"Fremont",
-    "growth_2000_2013":"10.0%",
-    "pop":224922,
-    "rank_size":97,
-    "state":"California"
     }
   },
   {
@@ -1385,20 +979,6 @@
     "pop":214114,
     "rank_size":99,
     "state":"Virginia"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ -117.2897652,34.1083449 ]
-    },
-    "properties": {
-    "city_name":"San Bernardino",
-    "growth_2000_2013":"13.0%",
-    "pop":213708,
-    "rank_size":100,
-    "state":"California"
     }
   }
 ]
