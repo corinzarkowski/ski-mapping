@@ -2520,7 +2520,8 @@
       },
       "properties": {
         "name": "Arapahoe Basin",
-        "pageviews-2020": 27373
+        "pageviews-2020": 27373,
+        "vertical": "2530"
       },
       "type": "Feature"
     },
@@ -2549,7 +2550,8 @@
       },
       "properties": {
         "name": "Aspen Mountain (ski area)",
-        "pageviews-2020": 25959
+        "pageviews-2020": 25959,
+        "vertical": "3267"
       },
       "type": "Feature"
     },
@@ -2608,7 +2610,8 @@
       },
       "properties": {
         "name": "Breckenridge Ski Resort",
-        "pageviews-2020": 37999
+        "pageviews-2020": 37999,
+        "vertical": "3398"
       },
       "type": "Feature"
     },
@@ -2622,7 +2625,8 @@
       },
       "properties": {
         "name": "Copper Mountain (Colorado)",
-        "pageviews-2020": 36168
+        "pageviews-2020": 36168,
+        "vertical": "2601"
       },
       "type": "Feature"
     },
@@ -2636,7 +2640,8 @@
       },
       "properties": {
         "name": "Crested Butte Mountain Resort",
-        "pageviews-2020": 15200
+        "pageviews-2020": 15200,
+        "vertical": "2775"
       },
       "type": "Feature"
     },
@@ -2722,7 +2727,8 @@
       },
       "properties": {
         "name": "Keystone Resort",
-        "pageviews-2020": 24721
+        "pageviews-2020": 24721,
+        "vertical": "2900"
       },
       "type": "Feature"
     },
@@ -2736,7 +2742,8 @@
       },
       "properties": {
         "name": "Loveland Ski Area",
-        "pageviews-2020": 14316
+        "pageviews-2020": 14316,
+        "vertical": "2210"
       },
       "type": "Feature"
     },
@@ -2867,7 +2874,8 @@
       },
       "properties": {
         "name": "Vail Ski Resort",
-        "pageviews-2020": 49864
+        "pageviews-2020": 49864,
+        "vertical": "3450"
       },
       "type": "Feature"
     },
@@ -2881,7 +2889,8 @@
       },
       "properties": {
         "name": "Winter Park Resort",
-        "pageviews-2020": 22739
+        "pageviews-2020": 22739,
+        "vertical": "3060"
       },
       "type": "Feature"
     },
@@ -3623,7 +3632,8 @@
       },
       "properties": {
         "name": "Park City Mountain Resort",
-        "pageviews-2020": 43372
+        "pageviews-2020": 43372,
+        "vertical": "3119"
       },
       "type": "Feature"
     },
